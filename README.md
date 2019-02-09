@@ -2,7 +2,7 @@
 
 A state lib for keeping track of and change localStorage data
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.org/oyvindhermansen/preserve.svg?branch=master)](https://travis-ci.org/oyvindhermansen/preserve) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## Install
 
@@ -38,4 +38,5 @@ myItem.subscribe(nextData => {
 // Clear the item from localStorage
 myItem.clearItem();
 ```
+
 # preserve
