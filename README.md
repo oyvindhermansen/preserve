@@ -18,7 +18,7 @@ yarn add @oyvindher/preserve
 
 ## API
 
-`Preserve(key:string, initialData?: any)`
+`preserve(key:string, initialData?: any)`
 
 The preserve function gives you 4 methods in return:
 
