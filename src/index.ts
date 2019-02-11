@@ -4,7 +4,7 @@ import { IPreserve, ListenerType } from './Interfaces';
 /**
  *
  * @param key the localstorage key name
- * @param initialState the initial state you want to store in your localstorage item
+ * @param initialState the initial state you want to store in your localstorage item. The initial state parameter is optional.
  */
 export default function preserve(key: string, initialState?: any): IPreserve {
   if (!key) {
