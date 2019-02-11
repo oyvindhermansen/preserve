@@ -22,7 +22,7 @@ yarn add @oyvindher/preserve
 
 The preserve function gives you 4 methods in return:
 
-- `get()` Gives the current state of your localstorage item.
+- `get<T>()` Gives the current state of your localstorage item.
 - `set<T>(data:T)` Set the current state of your localstorage item.
 - `subscribe(callback: nextData => void)` Gives you a callback to listen to current state changes
 - `clearItem()` Clears the localStorge item
