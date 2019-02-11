@@ -1,7 +1,12 @@
 import { isBrowser } from './utils';
 import { IPreserve, ListenerType } from './Interfaces';
 
-export default function preserve(key: string): IPreserve {
+/**
+ *
+ * @param key the localstorage key name
+ * @param initialState the initial state you want to store in your localstorage item. The initial state parameter is optional.
+ */
+export default function preserve(key: string, initialState?: any): IPreserve {
   if (!key) {
     throw new Error(`'Preserve' needs a key to keep track of you data.`);
   }
@@ -9,8 +14,15 @@ export default function preserve(key: string): IPreserve {
   // Check for browser environment, or else bail out.
   if (!isBrowser()) return undefined;
 
-  let currentData: any;
+  let currentData: any = undefined;
   const listeners: ListenerType[] = [];
+
+  if (get() === null || get() === undefined) {
+    if (initialState !== undefined) {
+      currentData = initialState;
+      set(currentData);
+    }
+  }
 
   /**
    * Provides you with the current localStorage
