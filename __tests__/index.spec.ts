@@ -7,6 +7,18 @@ describe('Preserve', () => {
     localStorage.clear();
   });
 
+  it('should be able to set initial data to localStorage', () => {
+    const key = 'myData';
+    const item = preserve(key, 0);
+
+    // Check for initial state
+    expect(localStorage.__STORE__[key]).toBe('0');
+
+    // Set new data
+    item.set(1);
+    expect(localStorage.__STORE__[key]).toBe('1');
+  });
+
   it('should be able to update data', () => {
     const key = 'myData';
     const initialData = { name: 'Øyvind' };
