@@ -1,4 +1,4 @@
-export type ListenerType = (nextData: any) => any;
+export type ListenerType = (prevData: any, nextData: any) => any;
 
 export interface IPreserve {
   get: <T>() => T;

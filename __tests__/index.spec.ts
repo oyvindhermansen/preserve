@@ -1,5 +1,8 @@
 import 'jest-localstorage-mock';
-import preserve from '../src/index';
+import preserve, { preserveLogger } from '../src/index';
+
+// @ts-ignore
+global.console = { warn: jest.fn(), log: jest.fn() };
 
 describe('Preserve', () => {
   beforeEach(() => {
@@ -60,7 +63,8 @@ describe('Preserve', () => {
     const item = preserve(key);
     item.set(1);
 
-    const listener = (nextItem: any) => {
+    const listener = (prevItem: any, nextItem: any) => {
+      expect(prevItem).toEqual(1);
       expect(nextItem).toEqual(10);
 
       done();
@@ -91,5 +95,38 @@ describe('Preserve', () => {
 
     expect(localStorage.__STORE__[key]).toBe(undefined);
     expect(item.get()).toBe(null);
+  });
+});
+
+describe('preserveLogger', () => {
+  it('should fail if not given a preserved item', () => {
+    expect(() => {
+      // @ts-ignore
+      preserveLogger();
+    }).toThrow();
+  });
+
+  it('should fail if provided with a non-preserved item', () => {
+    const fakeItem = { counter: 1 };
+
+    expect(() => {
+      // @ts-ignore
+      preserveLogger(fakeItem);
+    }).toThrow();
+  });
+
+  it('should log to the console if item is updated', () => {
+    const key = 'myData';
+    const item = preserve(key);
+
+    // Log the item
+    preserveLogger(item);
+
+    // Set new state
+    item.set(1);
+
+    expect(localStorage.__STORE__[key]).toBe('1');
+    expect(item.get()).toBe(1);
+    expect(console.log).toBeCalled();
   });
 });

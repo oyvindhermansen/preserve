@@ -24,7 +24,7 @@ The preserve function gives you 4 methods in return:
 
 - `get<T>()` Gives the current state of your localstorage item.
 - `set<T>(data:T)` Set the current state of your localstorage item.
-- `subscribe(callback: nextData => void)` Gives you a callback to listen to current state changes
+- `subscribe(callback: (prevData, nextData) => void)` Gives you a callback to listen to current state changes
 - `clearItem()` Clears the localStorge item
 
 ## Basic usage
@@ -49,7 +49,8 @@ myItem.set(1);
 
 ```ts
 // Listen to changes that happens within your localStorage item
-myItem.subscribe(nextData => {
+myItem.subscribe((prevData, nextData) => {
+  console.log(prevData); // 0
   console.log(nextData); // 1
 });
 ```
@@ -57,4 +58,21 @@ myItem.subscribe(nextData => {
 ```ts
 // Clear the item from localStorage
 myItem.clearItem();
+```
+
+---
+
+## preserveLogger
+
+PreserveLogger is a handy util for development for logging out previous and next state of any given preserved item when it changes.
+
+This is how you would use it:
+
+```ts
+import preserve, { preserveLogger } from '@oyvindher/preserve';
+
+const myItem = preserve('myItem');
+
+// Pass the item you want to log.
+preserveLogger(myItem);
 ```
