@@ -1,6 +1,6 @@
 {
   "name": "@oyvindher/preserve",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A handy localstorage util",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
